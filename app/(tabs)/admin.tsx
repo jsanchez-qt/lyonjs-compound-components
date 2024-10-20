@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function TabTwoScreen() {
+export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Evenements</Text>
+      <Text style={styles.title}>Admin</Text>
     </View>
   );
 }
