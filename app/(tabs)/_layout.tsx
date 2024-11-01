@@ -4,19 +4,22 @@ import { Text } from "react-native";
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{ headerShown: false }}
+      sceneContainerStyle={{ backgroundColor: "white" }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Meetups",
-          tabBarIcon: () => <Text style={{ fontSize: 24 }}>🦁</Text>,
+          title: "LyonJS",
+          tabBarIcon: (props) => <Text>🦁</Text>,
         }}
       />
       <Tabs.Screen
-        name="admin"
+        name="members"
         options={{
-          title: "Admin",
-          tabBarIcon: () => <Text style={{ fontSize: 24 }}>⚙️</Text>,
+          title: "Membres",
+          tabBarIcon: (props) => <Text>🍻</Text>,
         }}
       />
     </Tabs>
