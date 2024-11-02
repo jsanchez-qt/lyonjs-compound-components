@@ -1,4 +1,4 @@
-import { MeetupCard } from "@/components/meetups/meetup-card";
+import { MeetupCard } from "@/components/meetups/meetup-card/index";
 import { meetups } from "@/services/meetups";
 import {
   Dimensions,
@@ -23,7 +23,16 @@ export default function TabIndexScreen() {
           <View style={styles.highlightedList}>
             {highlightedMeetups.map((meetup) => (
               <View key={meetup.id} style={styles.highlightedCard}>
-                <MeetupCard meetup={meetup} showButton />
+                {/* <OldMeetupCard meetup={meetup} showButton /> */}
+                <MeetupCard>
+                  {/* <MeetupCard.Header source={meetup.thumbnail} /> */}
+                  <MeetupCard.BodyHighlighted>
+                    <MeetupCard.Title style={{ color: "black" }}>
+                      {meetup.title}
+                    </MeetupCard.Title>
+                    <MeetupCard.PartyPopper />
+                  </MeetupCard.BodyHighlighted>
+                </MeetupCard>
               </View>
             ))}
           </View>
@@ -34,7 +43,15 @@ export default function TabIndexScreen() {
           </Text>
           <View style={styles.list}>
             {meetups.map((meetup) => (
-              <MeetupCard key={meetup.id} meetup={meetup} />
+              <MeetupCard key={meetup.id}>
+                <MeetupCard.Header source={meetup.thumbnail} />
+                <MeetupCard.Body>
+                  <MeetupCard.Title>{meetup.title}</MeetupCard.Title>
+                  <MeetupCard.Description>
+                    {meetup.description}
+                  </MeetupCard.Description>
+                </MeetupCard.Body>
+              </MeetupCard>
             ))}
           </View>
         </View>
@@ -63,7 +80,6 @@ const styles = StyleSheet.create({
   list: {
     gap: 8,
   },
-
   highlightedList: {
     flexDirection: "row",
     flexWrap: "wrap",
