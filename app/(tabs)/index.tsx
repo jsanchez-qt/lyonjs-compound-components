@@ -1,12 +1,33 @@
 import { MeetupCard } from "@/components/meetups/meetup-card";
 import { meetups } from "@/services/meetups";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export default function TabIndexScreen() {
+  const highlightedMeetups = meetups.filter((meetup) => meetup.highlighted);
+
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.container} bounces={false}>
         <Text style={styles.title}>LyonJS</Text>
+        <View style={styles.subContainer}>
+          <Text style={styles.subTitle}>Hype !</Text>
+          <View style={styles.highlightedList}>
+            {highlightedMeetups.map((meetup) => (
+              <View key={meetup.id} style={styles.highlightedCard}>
+                <MeetupCard meetup={meetup} showButton />
+              </View>
+            ))}
+          </View>
+        </View>
         <View style={styles.subContainer}>
           <Text style={styles.subTitle}>
             Tous les événements ({meetups.length})
@@ -41,5 +62,17 @@ const styles = StyleSheet.create({
   },
   list: {
     gap: 8,
+  },
+
+  highlightedList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  highlightedCard: {
+    flexShrink: 0,
+    width: width / 2 - 24, // 24 = 20 padding + 4 gap
   },
 });
